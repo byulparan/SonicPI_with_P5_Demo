@@ -16,7 +16,7 @@ void setup() {
 }
 
 void draw() {
-  background(0);
+  background(0); 
   ArrayList<Box> temp = new ArrayList<Box>();
 
   front.beginDraw();
@@ -30,9 +30,9 @@ void draw() {
         temp.add(b);
       }
     }
-  }
-  for (Box b : temp) {
-    list.remove(b);
+    for (Box b : temp) {
+      list.remove(b);
+    }
   }
 
   front.endDraw();
@@ -46,12 +46,10 @@ void oscEvent(OscMessage m) {
   synchronized(list) {
     if (addr.equals("/circle")) {
       list.add(new Box(int(random(width)), int(random(height))));
-    }
-    else if (addr.equals("/rgb_circle")) {
-       list.add(new Box(color(m.get(0).floatValue(), m.get(1).floatValue(), m.get(2).floatValue()))); 
-    }
-    else if (addr.equals("/pos_circle")) {
-       list.add(new Box(int(m.get(0).floatValue()), int(m.get(1).floatValue()))); 
+    } else if (addr.equals("/rgb_circle")) {
+      list.add(new Box(color(m.get(0).floatValue(), m.get(1).floatValue(), m.get(2).floatValue())));
+    } else if (addr.equals("/pos_circle")) {
+      list.add(new Box(int(m.get(0).floatValue()), int(m.get(1).floatValue())));
     }
   }
 }
